@@ -112,7 +112,11 @@ if os.name == 'nt':
     symbol = '\\'
 if os.name == 'posix':
     symbol = '/'
+
+print(os.environ)
 dir_path = os.environ['PYTHONPATH'] + symbol
+dir_path = os.environ['_'] + symbol
+
 #print(dir_path)
 #dir_path = '/media/me/win10/MY/segd/grp/'  # тестовая папка потом закоментить
 
