@@ -115,8 +115,13 @@ if os.name == 'posix':
 
 print(os.environ)
 dir_path = os.environ['PYTHONPATH'] + symbol
-dir_path = os.environ['_'] + symbol
+#dir_path = os.environ['_'] + symbol
 
+dir = os.path.abspath(os.curdir)
+print('dir1',dir)
+
+os.path.abspath(__file__)
+print('dir2',dir)
 #print(dir_path)
 #dir_path = '/media/me/win10/MY/segd/grp/'  # тестовая папка потом закоментить
 
