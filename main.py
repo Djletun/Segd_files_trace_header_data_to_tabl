@@ -57,7 +57,7 @@ def posTrace(f, TraceNb):
 # ________read LineNb & PointNb
 def read_LineNb(segd_file, TraceNb):
     pos_Ext_Tr_Header_1 = posTrace(segd_file, TraceNb) + 20 - 244
-    #print('pos', pos_Ext_Tr_Header_1)
+    # print('pos', pos_Ext_Tr_Header_1)
     segd_file.seek(pos_Ext_Tr_Header_1)
     byte3 = segd_file.read(3)
     LineNb = int.from_bytes(byte3, 'big')
@@ -65,7 +65,7 @@ def read_LineNb(segd_file, TraceNb):
     PointNb = int.from_bytes(byte3, 'big')
 
     pos = pos_Ext_Tr_Header_1 + 161
-    #print('pos', pos)
+    # print('pos', pos)
     segd_file.seek(pos)
     byte3 = segd_file.read(3)
     UnitSerialNb = int.from_bytes(byte3, 'big')
@@ -86,6 +86,7 @@ def read_numfile(f):
         numfile = BCDto(k2) + BCDto(k1) * 100
     return numfile
 
+
 # процедура: создать список с данными из файла segd
 def list_of_data_segd(segd_file):
     result = list()
@@ -104,9 +105,6 @@ def list_of_data_segd(segd_file):
     return result
 
 
-
-
-
 ############################ получение символа разрыва от версии ОС
 if os.name == 'nt':
     symbol = '\\'
@@ -114,25 +112,21 @@ if os.name == 'posix':
     symbol = '/'
 
 print(os.environ)
-#dir_path = os.environ['PYTHONPATH'] + symbol
-#dir_path = os.environ['_'] + symbol
+try:
+    dir_path = os.environ['_'][:os.environ['_'].rfind(symbol) + 1]
+except KeyError:
+    dir_path = os.environ['PYTHONPATH'] + symbol
 
-dir = os.path.abspath(os.curdir)
-print('dir1',dir)
-
-os.path.abspath(__file__)
-print('dir2',dir)
-#print(dir_path)
-#dir_path = '/media/me/win10/MY/segd/grp/'  # тестовая папка потом закоментить
+# dir_path = '/media/me/win10/MY/segd/grp/'  # тестовая папка потом закоментить
 
 dir_files = os.listdir(dir_path)  # всё содержимое папки dir_path
-#print(dir_files)
-#print(dir_files[0][dir_files[0].rfind('.'):])
+# print(dir_files)
+# print(dir_files[0][dir_files[0].rfind('.'):])
 segd_files = tuple(filter(lambda s: s[s.rfind('.'):] == '.segd', dir_files))  # только файлы segd
 if len(segd_files) == 0:
     print('no segd files in dir')
     exit()
-#print('segd_files ', segd_files)
+# print('segd_files ', segd_files)
 # создаем папку result
 if not os.path.isdir(dir_path + 'result'):
     os.mkdir(dir_path + 'result')
@@ -141,12 +135,8 @@ if not os.path.isdir(dir_path + 'result'):
 
 with open(dir_path + 'result' + symbol + 'result.txt', 'w') as result_file:
     for file_path in segd_files:
- #       print(dir_path + file_path)
-        with open(dir_path+segd_files[0], 'rb') as segd_file:
+        #       print(dir_path + file_path)
+        with open(dir_path + segd_files[0], 'rb') as segd_file:
             result_file.writelines(list_of_data_segd(segd_file))
             segd_file.close()
     result_file.close()
-
-
-
-
