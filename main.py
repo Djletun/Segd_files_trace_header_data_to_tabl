@@ -114,7 +114,7 @@ if os.name == 'posix':
     symbol = '/'
 
 print(os.environ)
-dir_path = os.environ['PYTHONPATH'] + symbol
+#dir_path = os.environ['PYTHONPATH'] + symbol
 #dir_path = os.environ['_'] + symbol
 
 dir = os.path.abspath(os.curdir)
