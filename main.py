@@ -135,8 +135,7 @@ if not os.path.isdir(dir_path + 'result'):
 
 with open(dir_path + 'result' + symbol + 'result.txt', 'w') as result_file:
     for file_path in segd_files:
-        #       print(dir_path + file_path)
-        with open(dir_path + segd_files[0], 'rb') as segd_file:
+        with open(dir_path + file_path, 'rb') as segd_file:
             result_file.writelines(list_of_data_segd(segd_file))
             segd_file.close()
     result_file.close()
