@@ -111,11 +111,9 @@ if os.name == 'nt':
 if os.name == 'posix':
     symbol = '/'
 
-print(os.environ)
-try:
-    dir_path = os.environ['_'][:os.environ['_'].rfind(symbol) + 1]
-except KeyError:
-    dir_path = os.environ['PYTHONPATH'] + symbol
+#print(os.environ)
+dir_path = os.path.dirname(os.path.abspath(__file__)) + symbol
+print(dir_path)
 
 # dir_path = '/media/me/win10/MY/segd/grp/'  # тестовая папка потом закоментить
 
